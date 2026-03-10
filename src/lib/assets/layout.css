@@ -18,7 +18,11 @@
  * - /fonts/Geist/geist-mono.woff2
  * - /fonts/Inter/inter.woff2
  */
+@import 'tailwindcss';
+
 @import 'tw-animate-css';
+
+@source '../../node_modules/@polumeyv/ui/src';
 
 @custom-variant dark (&:is(.dark *));
 
