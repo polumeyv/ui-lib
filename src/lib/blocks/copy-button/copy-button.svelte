@@ -1,30 +1,47 @@
 <script lang="ts">
-	import { Button, type ButtonVariant, type ButtonSize } from '../../components/button/index.ts';
-	import Check from '@lucide/svelte/icons/check';
-	import Copy from '@lucide/svelte/icons/copy';
-	import { cn } from '../../utils.ts';
+	import { Button } from "../../components/button";
+	import * as Tooltip from "../../components/tooltip";
+	import { UseClipboard } from "./copy.svelte";
+	import { cn } from "../../utils";
+	import Clipboard from "@lucide/svelte/icons/clipboard";
+	import CheckIcon from "@lucide/svelte/icons/check";
+	import type { ComponentProps } from "svelte";
 
-	interface Props {
-		/** Text to copy to clipboard */
+	let {
+		text,
+		variant = "ghost",
+		class: className,
+		...restProps
+	}: ComponentProps<typeof Button> & {
 		text: string;
-		/** Button variant */
-		variant?: ButtonVariant;
-		/** Button size */
-		size?: ButtonSize;
-		/** Optional additional class */
-		class?: string;
-	}
+	} = $props();
 
-	let { text, variant = 'ghost', size = 'icon', class: className }: Props = $props();
-	let copied = $state(false);
-
-	function copy() {
-		navigator.clipboard.writeText(text);
-		copied = true;
-		setTimeout(() => (copied = false), 2000);
-	}
+	const clipboard = new UseClipboard();
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const rp = $derived(restProps as any);
 </script>
 
-<Button {size} {variant} class={cn('size-6', className)} onclick={copy}>
-	{#if copied}<Check class="size-3" />{:else}<Copy class="size-3" />{/if}
-</Button>
+<Tooltip.Root disableCloseOnTriggerClick>
+	<Tooltip.Trigger
+		{...rp}
+		class={cn(
+			"bg-code absolute end-2 top-3 z-10 size-7 hover:opacity-100 focus-visible:opacity-100",
+			className,
+		)}
+		onclick={() => clipboard.copy(text)}
+	>
+		{#snippet child({ props })}
+			<Button {...props} data-slot="copy-button" size="icon" {variant}>
+				<span class="sr-only" data-llm-ignore>Copy</span>
+				{#if clipboard.copied}
+					<CheckIcon />
+				{:else}
+					<Clipboard />
+				{/if}
+			</Button>
+		{/snippet}
+	</Tooltip.Trigger>
+	<Tooltip.Content>
+		{clipboard.copied ? "Copied" : "Copy to Clipboard"}
+	</Tooltip.Content>
+</Tooltip.Root>
