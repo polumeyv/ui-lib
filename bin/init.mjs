@@ -2,6 +2,7 @@
 import { existsSync, mkdirSync, copyFileSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve, join, dirname, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createInterface } from 'node:readline';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const cwd = process.cwd();
@@ -65,9 +66,19 @@ function printSummary(created, skipped) {
 	console.log();
 }
 
+function confirm(message) {
+	const rl = createInterface({ input: process.stdin, output: process.stdout });
+	return new Promise((resolve) => {
+		rl.question(`${message} (y/N) `, (answer) => {
+			rl.close();
+			resolve(answer.trim().toLowerCase() === 'y');
+		});
+	});
+}
+
 // --- Single-app mode (no flags) ---
 
-function runSingleApp() {
+async function runSingleApp() {
 	const hasRoutes = existsSync(join(cwd, 'src/routes'));
 	const hasStatic = existsSync(join(cwd, 'static'));
 	const hasSvelteConfig =
@@ -87,7 +98,13 @@ function runSingleApp() {
 	const layoutDest = join(cwd, 'src', 'routes', 'layout.css');
 
 	if (existsSync(layoutDest)) {
-		skipped.push('src/routes/layout.css');
+		const replace = await confirm('src/routes/layout.css already exists. Replace it?');
+		if (replace) {
+			copyFileSync(layoutSrc, layoutDest);
+			created.push('src/routes/layout.css (replaced)');
+		} else {
+			skipped.push('src/routes/layout.css');
+		}
 	} else {
 		copyFileSync(layoutSrc, layoutDest);
 		created.push('src/routes/layout.css');
@@ -314,5 +331,5 @@ const opts = parseArgs();
 if (opts.workspace) {
 	runWorkspace(opts);
 } else {
-	runSingleApp();
+	await runSingleApp();
 }
