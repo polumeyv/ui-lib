@@ -1,23 +1,4 @@
-/*
- * @polumeyv/ui — Layout CSS Template
- *
- * Copy this file into your SvelteKit app (e.g. src/routes/layout.css)
- * and import it from your root +layout.svelte.
- *
- * Customize the CSS variables below to match your brand.
- * Font files are expected at /fonts/Geist/ and /fonts/Inter/ in your static dir.
- * Run `bunx @polumeyv/ui init` to scaffold fonts and this file automatically.
- */
-
-/*
- * @cresends/ui Theme
- * shadcn-svelte compatible theme
- *
- * NOTE: Font files must be provided by the consuming application at:
- * - /fonts/Geist/geist.woff2
- * - /fonts/Geist/geist-mono.woff2
- * - /fonts/Inter/inter.woff2
- */
+/* Customize the CSS variables in :root and .dark to match your brand. */
 @import 'tailwindcss';
 
 @import 'tw-animate-css';
