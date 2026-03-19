@@ -1,6 +1,6 @@
 {
 	"name": "@polumeyv/ui",
-	"version": "0.0.8",
+	"version": "0.0.9",
 	"description": "Svelte 5 UI component library with Tailwind CSS",
 	"publishConfig": {
 		"access": "public",

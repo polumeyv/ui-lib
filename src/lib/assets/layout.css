@@ -27,15 +27,22 @@
 	font-style: normal;
 	font-display: swap;
 }
+@custom-variant dark (&:is(.dark *));
+@custom-variant fixed (&:is(.layout-fixed *));
 
 @theme inline {
-	--font-sans: 'Geist', sans-serif;
-	--font-mono: 'Geist Mono', monospace;
-	--font-inter: 'Inter', sans-serif;
+	--font-sans: var(--font-sans);
+	--font-mono: var(--font-mono);
+	--radius: 0.625rem;
+	--breakpoint-3xl: 1600px;
+	--breakpoint-4xl: 2000px;
 	--radius-sm: calc(var(--radius) - 4px);
 	--radius-md: calc(var(--radius) - 2px);
 	--radius-lg: var(--radius);
 	--radius-xl: calc(var(--radius) + 4px);
+	--radius-2xl: calc(var(--radius) + 8px);
+	--radius-3xl: calc(var(--radius) + 12px);
+	--radius-4xl: calc(var(--radius) + 16px);
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 	--color-card: var(--card);
@@ -51,6 +58,7 @@
 	--color-accent: var(--accent);
 	--color-accent-foreground: var(--accent-foreground);
 	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
 	--color-border: var(--border);
 	--color-input: var(--input);
 	--color-ring: var(--ring);
@@ -69,11 +77,17 @@
 	--color-sidebar-ring: var(--sidebar-ring);
 	--color-surface: var(--surface);
 	--color-surface-foreground: var(--surface-foreground);
+	--color-code: var(--code);
+	--color-code-foreground: var(--code-foreground);
+	--color-code-highlight: var(--code-highlight);
+	--color-code-number: var(--code-number);
 	--color-selection: var(--selection);
 	--color-selection-foreground: var(--selection-foreground);
 }
 
 :root {
+	--font-sans: var(--font-sans);
+	--font-mono: var(--font-mono);
 	--radius: 0.625rem;
 	--background: oklch(1 0.003 75);
 	--foreground: oklch(0.145 0 0);
@@ -90,6 +104,7 @@
 	--accent: oklch(0.97 0.003 75);
 	--accent-foreground: oklch(0.205 0 0);
 	--destructive: oklch(0.577 0.245 27.325);
+	--destructive-foreground: oklch(0.985 0 0);
 	--border: oklch(0.922 0.003 75);
 	--input: oklch(0.922 0.003 75);
 	--ring: oklch(0.708 0.003 75);
@@ -108,6 +123,10 @@
 	--sidebar-ring: oklch(0.708 0.003 75);
 	--surface: oklch(0.98 0.003 75);
 	--surface-foreground: var(--foreground);
+	--code: var(--surface);
+	--code-foreground: var(--surface-foreground);
+	--code-highlight: oklch(0.96 0.003 75);
+	--code-number: oklch(0.56 0 0);
 	--selection: oklch(0.145 0 0);
 	--selection-foreground: oklch(1 0.003 75);
 }
@@ -128,6 +147,7 @@
 	--accent: oklch(0.405 0.003 75);
 	--accent-foreground: oklch(0.985 0 0);
 	--destructive: oklch(0.704 0.191 22.216);
+	--destructive-foreground: oklch(0.985 0 0);
 	--border: oklch(1 0.003 75 / 14%);
 	--input: oklch(1 0.003 75 / 19%);
 	--ring: oklch(0.576 0.003 75);
@@ -146,10 +166,13 @@
 	--sidebar-ring: oklch(0.45 0.001 75);
 	--surface: oklch(0.235 0.003 75);
 	--surface-foreground: oklch(0.708 0 0);
+	--code: var(--surface);
+	--code-foreground: var(--surface-foreground);
+	--code-highlight: oklch(0.27 0.003 75);
+	--code-number: oklch(0.72 0 0);
 	--selection: oklch(0.922 0.003 75);
 	--selection-foreground: oklch(0.24 0.003 75);
 }
-
 @layer base {
 	* {
 		@apply border-border outline-ring/50;
@@ -160,22 +183,84 @@
 	}
 
 	html {
-		@apply scroll-smooth;
-		overflow-y: scroll;
-		scrollbar-width: thin;
-		scrollbar-gutter: stable;
+		@apply overscroll-none scroll-smooth;
 	}
 
 	body {
-		@apply bg-background text-foreground;
 		font-synthesis-weight: none;
 		text-rendering: optimizeLegibility;
-		padding-right: 0 !important;
+	}
+
+	@supports (font: -apple-system-body) and (-webkit-appearance: none) {
+		[data-wrapper] {
+			@apply min-[1800px]:border-t;
+		}
 	}
 
 	a:active,
 	button:active {
 		@apply opacity-60 md:opacity-100;
+	}
+}
+
+/* Custom variants */
+@custom-variant data-open {
+	&:where([data-state="open"]),
+	&:where([data-open]:not([data-open="false"])) {
+		@slot;
+	}
+}
+
+@custom-variant data-closed {
+	&:where([data-state="closed"]),
+	&:where([data-closed]:not([data-closed="false"])) {
+		@slot;
+	}
+}
+
+@custom-variant data-checked {
+	&:where([data-state="checked"]),
+	&:where([data-checked]:not([data-checked="false"])) {
+		@slot;
+	}
+}
+
+@custom-variant data-unchecked {
+	&:where([data-state="unchecked"]),
+	&:where([data-unchecked]:not([data-unchecked="false"])) {
+		@slot;
+	}
+}
+
+@custom-variant data-selected {
+	&:where([data-selected]) {
+		@slot;
+	}
+}
+
+@custom-variant data-disabled {
+	&:where([data-disabled="true"]),
+	&:where([data-disabled]:not([data-disabled="false"])) {
+		@slot;
+	}
+}
+
+@custom-variant data-active {
+	&:where([data-state="active"]),
+	&:where([data-active]:not([data-active="false"])) {
+		@slot;
+	}
+}
+
+@custom-variant data-horizontal {
+	&:where([data-orientation="horizontal"]) {
+		@slot;
+	}
+}
+
+@custom-variant data-vertical {
+	&:where([data-orientation="vertical"]) {
+		@slot;
 	}
 }
 
@@ -188,9 +273,71 @@
 	}
 }
 
+@utility border-grid {
+	@apply border-border/50 dark:border-border;
+}
+
+@utility section-soft {
+	@apply from-background to-surface/40 dark:bg-background 3xl:fixed:bg-none bg-gradient-to-b;
+}
+
+@utility theme-container {
+	@apply font-sans;
+}
+
+@utility container-wrapper {
+	@apply 3xl:fixed:max-w-[calc(var(--breakpoint-2xl)+2rem)] mx-auto w-full px-2;
+}
+
+@utility container {
+	@apply 3xl:max-w-screen-2xl mx-auto max-w-[1400px] px-4 lg:px-8;
+}
+
+@utility no-scrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+@utility border-ghost {
+	@apply after:border-border relative after:absolute after:inset-0 after:border after:mix-blend-darken dark:after:mix-blend-lighten;
+}
+
+@utility step {
+	counter-increment: step;
+	@apply relative;
+
+	&:before {
+		@apply text-muted-foreground end-0 me-2 hidden size-7 items-center justify-center rounded-full text-center -indent-px font-mono text-sm font-medium md:absolute;
+		content: counter(step);
+	}
+}
+
 @utility extend-touch-target {
 	@media (pointer: coarse) {
 		@apply relative touch-manipulation after:absolute after:-inset-2;
 	}
 }
 
+@layer components {
+	.steps {
+		&:first-child {
+			@apply !mt-0;
+		}
+
+		&:first-child > *[aria-level="3"]:first-child {
+			@apply !mt-0;
+		}
+
+		> *[aria-level="3"] {
+			@apply !mt-16;
+		}
+
+		> *[aria-level="3"] + p {
+			@apply !mt-2;
+		}
+	}
+}
