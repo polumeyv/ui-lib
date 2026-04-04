@@ -14,4 +14,4 @@ export { cn, Money, uuidv7ToDate } from './utils.ts';
 export type { WithoutChild, WithoutChildrenOrChild, WithoutChildren, WithElementRef } from './utils.ts';
 
 // Re-export hooks
-export { IsMobile, isMobile } from './hooks/index.ts';
+export { IsMobile, isMobile, scrollReveal } from './hooks/index.ts';
