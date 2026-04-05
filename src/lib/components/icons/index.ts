@@ -1,1 +1,1 @@
-export { default as GoogleIcon } from './google-icon.svelte';
+export { GoogleIcon } from '../../icons/index.ts';

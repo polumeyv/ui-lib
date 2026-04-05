@@ -1,6 +1,15 @@
 /**
  * UI Components - All shadcn-svelte components
+ *
+ * Also re-exports blocks, hooks, and utils for backwards compatibility.
+ * Prefer granular imports: @polumeyv/ui/blocks, @polumeyv/ui/hooks, @polumeyv/ui/utils
  */
+
+// Re-export blocks, hooks, and utils
+export * from '../blocks/index.ts';
+export * from '../hooks/index.ts';
+export { cn } from '../utils.ts';
+export type { WithoutChild, WithoutChildrenOrChild, WithoutChildren, WithElementRef } from '../utils.ts';
 
 // Re-export toast from sonner
 export { toast, TOAST_ERRORS, toastError } from './sonner/index.ts';
@@ -31,7 +40,7 @@ export * as DropdownMenu from './dropdown-menu/index.ts';
 export * as Empty from './empty/index.ts';
 export * as Field from './field/index.ts';
 export * as HoverCard from './hover-card/index.ts';
-export { GoogleIcon } from './icons/index.ts';
+export { GoogleIcon } from '../icons/index.ts';
 export { ImageCropper } from './image-cropper/index.ts';
 export { Input } from './input/index.ts';
 export * as InputGroup from './input-group/index.ts';

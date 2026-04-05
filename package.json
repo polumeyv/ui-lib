@@ -10,7 +10,7 @@
 	"keywords": ["svelte", "ui", "components", "tailwind"],
 	"type": "module",
 	"repository": "github:polumeyv/ui-lib",
-	"svelte": "./src/lib/index.ts",
+	"svelte": "./src/lib/components/index.ts",
 	"sideEffects": [
 		"**/*.css"
 	],
@@ -27,35 +27,65 @@
 	],
 	"exports": {
 		".": {
-			"types": "./src/lib/index.ts",
-			"svelte": "./src/lib/index.ts",
-			"default": "./src/lib/index.ts"
+			"types": "./src/lib/components/index.ts",
+			"svelte": "./src/lib/components/index.ts",
+			"default": "./src/lib/components/index.ts"
 		},
-		"./styles": "./src/lib/assets/layout.css"
+		"./blocks": {
+			"types": "./src/lib/blocks/index.ts",
+			"svelte": "./src/lib/blocks/index.ts",
+			"default": "./src/lib/blocks/index.ts"
+		},
+		"./hooks": {
+			"types": "./src/lib/hooks/index.ts",
+			"svelte": "./src/lib/hooks/index.ts",
+			"default": "./src/lib/hooks/index.ts"
+		},
+		"./layout": {
+			"types": "./src/lib/layout/index.ts",
+			"svelte": "./src/lib/layout/index.ts",
+			"default": "./src/lib/layout/index.ts"
+		},
+		"./utils": {
+			"types": "./src/lib/utils.ts",
+			"default": "./src/lib/utils.ts"
+		},
+		"./format": {
+			"types": "./src/lib/format/index.ts",
+			"default": "./src/lib/format/index.ts"
+		},
+		"./icons": {
+			"types": "./src/lib/icons/index.ts",
+			"svelte": "./src/lib/icons/index.ts",
+			"default": "./src/lib/icons/index.ts"
+		},
+		"./styles": "./src/lib/assets/layout.css",
+		"./fonts": "./src/lib/assets/fonts.css"
 	},
 	"peerDependencies": {
-		"svelte": "^5.53.7"
+		"svelte": "catalog:"
 	},
 	"dependencies": {
-		"@lucide/svelte": "^0.577.0",
-		"@tanstack/table-core": "^8.21.3",
-		"bits-ui": "^2.16.3",
-		"clsx": "^2.1.1",
-		"d3-scale": "^4.0.2",
-		"embla-carousel-svelte": "^8.6.0",
-		"layerchart": "2.0.0-next.46",
-		"mode-watcher": "^1.1.0",
-		"paneforge": "^1.0.2",
-		"svelte-sonner": "^1.0.8",
-		"tailwind-merge": "^3.5.0",
-		"tailwind-variants": "^3.2.2",
-		"vaul-svelte": "1.0.0-next.7"
+		"@lucide/svelte": "catalog:ui",
+		"@tanstack/table-core": "catalog:ui",
+		"bits-ui": "catalog:ui",
+		"clsx": "catalog:styling",
+		"d3-scale": "catalog:ui",
+		"embla-carousel-svelte": "catalog:ui",
+		"layerchart": "catalog:ui",
+		"mode-watcher": "catalog:ui",
+		"paneforge": "catalog:ui",
+		"svelte-sonner": "catalog:ui",
+		"tailwind-merge": "catalog:styling",
+		"tailwind-variants": "catalog:styling",
+		"vaul-svelte": "catalog:ui",
+		"dinero.js": "catalog:infra"
 	},
 	"devDependencies": {
-		"@sveltejs/vite-plugin-svelte": "^6.2.4",
-		"svelte": "^5.53.7",
-		"svelte-check": "^4.4.4",
-		"tw-animate-css": "^1.4.0",
-		"vite": "^8.0.0"
+		"@sveltejs/vite-plugin-svelte": "catalog:",
+		"svelte": "catalog:",
+		"svelte-check": "catalog:",
+		"tw-animate-css": "catalog:styling",
+		"vite": "catalog:"
 	}
 }

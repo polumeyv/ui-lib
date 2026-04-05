@@ -5,28 +5,8 @@
 
 @source '../../node_modules/@polumeyv/ui/src';
 
-@custom-variant dark (&:is(.dark *));
+@import './fonts.css';
 
-@font-face {
-	font-family: 'Geist';
-	src: url('/fonts/Geist/geist.woff2') format('woff2');
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Geist Mono';
-	src: url('/fonts/Geist/geist-mono.woff2') format('woff2');
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Inter';
-	src: url('/fonts/Inter/inter.woff2') format('woff2');
-	font-style: normal;
-	font-display: swap;
-}
 @custom-variant dark (&:is(.dark *));
 @custom-variant fixed (&:is(.layout-fixed *));
 
