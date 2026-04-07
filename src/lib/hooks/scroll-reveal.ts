@@ -1,10 +1,15 @@
 import type { Attachment } from 'svelte/attachments';
 
 export const scrollReveal: Attachment<HTMLElement> = (node) => {
+	node.style.opacity = '0';
+	node.style.transform = 'translateY(24px)';
+	node.style.transition = 'opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+
 	const observer = new IntersectionObserver(
 		([entry]) => {
 			if (entry.isIntersecting) {
-				node.classList.add('revealed');
+				node.style.opacity = '1';
+				node.style.transform = 'translateY(0)';
 				observer.disconnect();
 			}
 		},

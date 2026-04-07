@@ -1,6 +1,4 @@
 /* Customize the CSS variables in :root and .dark to match your brand. */
-@import 'tailwindcss';
-
 @import 'tw-animate-css';
 
 @source '../../node_modules/@polumeyv/ui/src';

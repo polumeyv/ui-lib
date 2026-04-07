@@ -1,0 +1,61 @@
+<script lang="ts">
+	import * as AlertDialog from '../../components/alert-dialog/index.ts';
+	import * as Field from '../../components/field/index.ts';
+	import { Root as Input } from '../../components/input/index.ts';
+	import { Spinner } from '../../components/spinner/index.ts';
+	import { alertModal } from './alert-modal.svelte.ts';
+
+	const variantClasses: Record<string, string> = {
+		destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+		warning: 'bg-warning text-warning-foreground hover:bg-warning/90',
+	};
+
+	const titleClasses: Record<string, string> = {
+		destructive: 'text-destructive',
+	};
+</script>
+
+<AlertDialog.Root
+	open={alertModal.open}
+	onOpenChange={(open) => { if (!open) alertModal.close(); }}
+>
+	<AlertDialog.Content>
+		{#if alertModal.options}
+			{@const opts = alertModal.options}
+			<AlertDialog.Header>
+				<AlertDialog.Title class={titleClasses[opts.variant ?? ''] ?? ''}>
+					{opts.title}
+				</AlertDialog.Title>
+				<AlertDialog.Description>{opts.description}</AlertDialog.Description>
+			</AlertDialog.Header>
+
+			{#if opts.confirmText}
+				<Field.Field>
+					<Field.Label>Type "{opts.confirmText}" to confirm</Field.Label>
+					<Input bind:value={alertModal.confirmInput} placeholder={opts.confirmText} />
+				</Field.Field>
+			{/if}
+
+			{#if opts.content}
+				{@render opts.content()}
+			{/if}
+
+			<AlertDialog.Footer>
+				<AlertDialog.Cancel disabled={alertModal.loading}>
+					{opts.cancelLabel ?? 'Cancel'}
+				</AlertDialog.Cancel>
+				<AlertDialog.Action
+					class={variantClasses[opts.variant ?? ''] ?? ''}
+					disabled={!alertModal.canConfirm}
+					onclick={(e: MouseEvent) => {
+						e.preventDefault();
+						alertModal.handleConfirm();
+					}}
+				>
+					{#if alertModal.loading}<Spinner />{/if}
+					{alertModal.loading ? 'Please wait...' : alertModal.actionLabel}
+				</AlertDialog.Action>
+			</AlertDialog.Footer>
+		{/if}
+	</AlertDialog.Content>
+</AlertDialog.Root>

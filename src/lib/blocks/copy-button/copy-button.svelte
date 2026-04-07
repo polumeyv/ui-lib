@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { Button } from "../../components/button";
-	import * as Tooltip from "../../components/tooltip";
-	import { UseClipboard } from "./copy.svelte";
-	import { cn } from "../../utils";
-	import Clipboard from "@lucide/svelte/icons/clipboard";
-	import CheckIcon from "@lucide/svelte/icons/check";
-	import type { ComponentProps } from "svelte";
+	import { Button } from '../../components/button';
+	import * as Tooltip from '../../components/tooltip';
+	import { UseClipboard } from './copy.svelte';
+	import { cn } from '../../utils';
+	import Clipboard from '@lucide/svelte/icons/clipboard';
+	import CheckIcon from '@lucide/svelte/icons/check';
+	import type { ComponentProps } from 'svelte';
 
 	let {
 		text,
-		variant = "ghost",
+		variant = 'ghost',
 		class: className,
 		...restProps
 	}: ComponentProps<typeof Button> & {
@@ -24,12 +24,8 @@
 <Tooltip.Root disableCloseOnTriggerClick>
 	<Tooltip.Trigger
 		{...rp}
-		class={cn(
-			"bg-code absolute end-2 top-3 z-10 size-7 hover:opacity-100 focus-visible:opacity-100",
-			className,
-		)}
-		onclick={() => clipboard.copy(text)}
-	>
+		class={cn('bg-code absolute end-2 top-3 z-10 size-7 hover:opacity-100 focus-visible:opacity-100', className)}
+		onclick={() => clipboard.copy(text)}>
 		{#snippet child({ props })}
 			<Button {...props} data-slot="copy-button" size="icon" {variant}>
 				<span class="sr-only" data-llm-ignore>Copy</span>
@@ -42,6 +38,6 @@
 		{/snippet}
 	</Tooltip.Trigger>
 	<Tooltip.Content>
-		{clipboard.copied ? "Copied" : "Copy to Clipboard"}
+		{clipboard.copied ? 'Copied' : 'Copy to Clipboard'}
 	</Tooltip.Content>
 </Tooltip.Root>

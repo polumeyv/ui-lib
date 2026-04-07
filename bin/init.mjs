@@ -12,10 +12,7 @@ const fontFamilies = ['Geist', 'Inter'];
 // --- Helpers ---
 
 function isSvelteKitApp(dir) {
-	return (
-		existsSync(join(dir, 'src/routes')) &&
-		(existsSync(join(dir, 'svelte.config.js')) || existsSync(join(dir, 'svelte.config.ts')))
-	);
+	return existsSync(join(dir, 'src/routes')) && (existsSync(join(dir, 'svelte.config.js')) || existsSync(join(dir, 'svelte.config.ts')));
 }
 
 function copyFonts(destBase) {
@@ -81,13 +78,10 @@ function confirm(message) {
 async function runSingleApp() {
 	const hasRoutes = existsSync(join(cwd, 'src/routes'));
 	const hasStatic = existsSync(join(cwd, 'static'));
-	const hasSvelteConfig =
-		existsSync(join(cwd, 'svelte.config.js')) || existsSync(join(cwd, 'svelte.config.ts'));
+	const hasSvelteConfig = existsSync(join(cwd, 'svelte.config.js')) || existsSync(join(cwd, 'svelte.config.ts'));
 
 	if (!hasRoutes || (!hasStatic && !hasSvelteConfig)) {
-		console.error(
-			'Not a SvelteKit app directory. If in a monorepo, cd into the individual app first.'
-		);
+		console.error('Not a SvelteKit app directory. If in a monorepo, cd into the individual app first.');
 		process.exit(1);
 	}
 
@@ -261,8 +255,8 @@ function runWorkspace(opts) {
 		private: true,
 		type: 'module',
 		exports: {
-			'./styles': './styles.css'
-		}
+			'./styles': './styles.css',
+		},
 	};
 	writeJson(join(themeDir, 'package.json'), themePkg);
 	created.push(`${packagesDir}/${themeName}/package.json`);
@@ -296,9 +290,7 @@ function runWorkspace(opts) {
 		appPkg.dependencies[themePkgName] = 'workspace:*';
 
 		// Sort dependencies alphabetically
-		appPkg.dependencies = Object.fromEntries(
-			Object.entries(appPkg.dependencies).sort(([a], [b]) => a.localeCompare(b))
-		);
+		appPkg.dependencies = Object.fromEntries(Object.entries(appPkg.dependencies).sort(([a], [b]) => a.localeCompare(b)));
 
 		writeJson(appPkgPath, appPkg);
 		created.push(`${app.pkgDir}/package.json (added ${themePkgName})`);
