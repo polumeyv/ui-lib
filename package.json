@@ -7,7 +7,12 @@
 		"registry": "https://npm.pkg.github.com"
 	},
 	"license": "MIT",
-	"keywords": ["svelte", "ui", "components", "tailwind"],
+	"keywords": [
+		"svelte",
+		"ui",
+		"components",
+		"tailwind"
+	],
 	"type": "module",
 	"repository": "github:polumeyv/ui-lib",
 	"sideEffects": [
@@ -83,8 +88,9 @@
 		"./toggle": "./src/lib/components/toggle/index.ts",
 		"./toggle-group": "./src/lib/components/toggle-group/index.ts",
 		"./tooltip": "./src/lib/components/tooltip/index.ts",
-		"./window-frame": "./src/lib/components/window-frame.svelte",
 		"./blocks": "./src/lib/blocks/index.ts",
+		"./stripe": "./src/lib/stripe/index.ts",
+		"./mockups": "./src/lib/mockups/index.ts",
 		"./hooks": "./src/lib/hooks/index.ts",
 		"./layout": "./src/lib/layout/index.ts",
 		"./utils": "./src/lib/utils.ts",
@@ -110,7 +116,8 @@
 		"tailwind-merge": "catalog:styling",
 		"tailwind-variants": "catalog:styling",
 		"vaul-svelte": "catalog:ui",
-		"dinero.js": "catalog:infra"
+		"dinero.js": "catalog:infra",
+		"@stripe/stripe-js": "catalog:infra"
 	},
 	"devDependencies": {
 		"@sveltejs/vite-plugin-svelte": "catalog:",

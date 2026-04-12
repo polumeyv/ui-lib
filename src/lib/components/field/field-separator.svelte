@@ -6,10 +6,12 @@
 	let {
 		ref = $bindable(null),
 		class: className,
+		childBackground = 'bg-background',
 		children,
 		...restProps
 	}: WithElementRef<HTMLAttributes<HTMLDivElement>> & {
 		children?: Snippet;
+		childBackground?: string;
 	} = $props();
 	const hasContent = $derived(!!children);
 </script>
@@ -22,9 +24,7 @@
 	{...restProps}>
 	<Separator class="absolute inset-0 top-1/2" />
 	{#if children}
-		<span
-			class="bg-background text-muted-foreground relative mx-auto block w-fit px-2"
-			data-slot="field-separator-content">
+		<span class={cn('relative mx-auto block w-fit px-2', childBackground)} data-slot="field-separator-content">
 			{@render children()}
 		</span>
 	{/if}

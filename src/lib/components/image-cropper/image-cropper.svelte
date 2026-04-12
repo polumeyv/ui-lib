@@ -1,5 +1,7 @@
 <script lang="ts">
-import { Dialog, Button, Slider } from '../index.ts';
+import * as Dialog from '@polumeyv/ui/dialog';
+import { Button } from '@polumeyv/ui/button';
+import { Slider } from '@polumeyv/ui/slider';
 import Upload from '@lucide/svelte/icons/upload';
 
 interface Props {
