@@ -16,10 +16,6 @@ jobs:
 
       - uses: oven-sh/setup-bun@v2
 
-      - name: Configure npm auth
-        run: |
-          printf '@polumeyv:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=%s\n' "${{ secrets.GITHUB_TOKEN }}" > .npmrc
-
       - name: Bump patch version
         run: |
           OLD=$(node -p "require('./package.json').version")
@@ -28,3 +24,5 @@ jobs:
           echo "Bumped $OLD -> $NEW"
 
       - run: bun publish --access public
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
