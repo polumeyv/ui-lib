@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cn, type WithElementRef } from '../../utils.ts';
+	import { cn, type WithElementRef } from '../../utils';
 	import type { HTMLFieldsetAttributes } from 'svelte/elements';
 	let {
 		ref = $bindable(null),

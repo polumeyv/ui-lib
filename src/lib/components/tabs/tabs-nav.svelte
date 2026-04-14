@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cn } from '../../utils.ts';
+	import { cn } from '../../utils';
 
 	type Tab = { id: string; label: string; href: string };
 

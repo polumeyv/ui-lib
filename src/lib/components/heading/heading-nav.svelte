@@ -1,6 +1,6 @@
 <script lang="ts" generics="T extends string">
 	import type { Component } from 'svelte';
-	import { cn } from '../../utils.ts';
+	import { cn } from '../../utils';
 
 	type Tab<T extends string> = {
 		id: T;

@@ -1,4 +1,4 @@
-export * from './alert-modal/index.ts';
-export * from './appearance/index.ts';
-export * from './copy-button/index.ts';
+export * from './alert-modal';
+export * from './appearance';
+export * from './copy-button';
 export { default as PhoneInput } from './PhoneInput.svelte';

@@ -1,8 +1,8 @@
 <script lang="ts">
-import { cn, type WithElementRef } from '../../utils.ts';
+import { cn, type WithElementRef } from '../../utils';
 import type { HTMLAttributes } from 'svelte/elements';
 import type { Snippet } from 'svelte';
-import * as Avatar from '../avatar/index.ts';
+import * as Avatar from '../avatar';
 import User from '@lucide/svelte/icons/user';
 
 let {

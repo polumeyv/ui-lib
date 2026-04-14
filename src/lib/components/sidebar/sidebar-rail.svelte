@@ -1,7 +1,7 @@
 <script lang="ts">
-import { cn, type WithElementRef } from '../../utils.ts';
+import { cn, type WithElementRef } from '../../utils';
 import type { HTMLAttributes } from 'svelte/elements';
-import { useSidebar } from './context.svelte.ts';
+import { useSidebar } from './context.svelte';
 
 let {
 	ref = $bindable(null),

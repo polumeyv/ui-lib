@@ -3,8 +3,8 @@ import { Dialog as DialogPrimitive } from 'bits-ui';
 import DialogPortal from './dialog-portal.svelte';
 import XIcon from '@lucide/svelte/icons/x';
 import type { Snippet } from 'svelte';
-import * as Dialog from './index.ts';
-import { cn, type WithoutChildrenOrChild } from '../../utils.ts';
+import * as Dialog from './index';
+import { cn, type WithoutChildrenOrChild } from '../../utils';
 import type { ComponentProps } from 'svelte';
 
 let {

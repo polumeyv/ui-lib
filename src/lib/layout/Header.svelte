@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { Button } from '../components/button/index.ts';
-	import { ThemeToggle } from '../components/theme-toggle/index.ts';
-	import * as Sheet from '../components/sheet/index.ts';
+	import { Button } from '../components/button';
+	import { ThemeToggle } from '../components/theme-toggle';
+	import * as Sheet from '../components/sheet';
 	import Menu from '@lucide/svelte/icons/menu';
 
 	interface Props {

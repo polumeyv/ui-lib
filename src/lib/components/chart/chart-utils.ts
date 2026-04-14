@@ -1,5 +1,5 @@
-import type { TooltipSeries } from 'layerchart';
-import { type Component, getContext, setContext } from 'svelte';
+import type { Tooltip } from 'layerchart';
+import { getContext, setContext, type Component, type Snippet } from 'svelte';
 
 export const THEMES = { light: '', dark: '.dark' } as const;
 
@@ -10,22 +10,34 @@ export type ChartConfig = {
 	} & ({ color?: string; theme?: never } | { color?: never; theme: Record<keyof typeof THEMES, string> });
 };
 
-export type TooltipPayload = TooltipSeries;
+export type ExtractSnippetParams<T> = T extends Snippet<[infer P]> ? P : never;
 
-// Helper to extract item config from a series item. `data` is the raw data row (TooltipState.data).
-export function getPayloadConfigFromPayload(config: ChartConfig, item: TooltipSeries, key: string, data?: unknown) {
-	if (typeof item !== 'object' || item === null) return undefined;
+export type TooltipPayload = Tooltip.TooltipSeries;
 
-	const row = typeof data === 'object' && data !== null ? (data as Record<string, unknown>) : undefined;
+// Helper to extract item config from a payload.
+export function getPayloadConfigFromPayload(
+	config: ChartConfig,
+	payload: TooltipPayload,
+	key: string,
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	data?: Record<string, any> | null,
+) {
+	if (typeof payload !== 'object' || payload === null) return undefined;
+
+	const payloadConfig = 'config' in payload && typeof payload.config === 'object' && payload.config !== null ? payload.config : undefined;
 
 	let configLabelKey: string = key;
 
-	if (item.key === key) {
-		configLabelKey = item.key;
-	} else if (key in item && typeof (item as Record<string, unknown>)[key] === 'string') {
-		configLabelKey = (item as Record<string, unknown>)[key] as string;
-	} else if (row !== undefined && key in row && typeof row[key] === 'string') {
-		configLabelKey = row[key] as string;
+	if (payload.key === key) {
+		configLabelKey = payload.key;
+	} else if (payload.label === key) {
+		configLabelKey = payload.label;
+	} else if (key in payload && typeof payload[key as keyof typeof payload] === 'string') {
+		configLabelKey = payload[key as keyof typeof payload] as string;
+	} else if (payloadConfig !== undefined && key in payloadConfig && typeof payloadConfig[key as keyof typeof payloadConfig] === 'string') {
+		configLabelKey = payloadConfig[key as keyof typeof payloadConfig] as string;
+	} else if (data != null && key in data && typeof data[key] === 'string') {
+		configLabelKey = data[key] as string;
 	}
 
 	return configLabelKey in config ? config[configLabelKey] : config[key as keyof typeof config];

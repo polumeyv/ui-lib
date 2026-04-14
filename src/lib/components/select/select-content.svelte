@@ -3,9 +3,9 @@ import { Select as SelectPrimitive } from 'bits-ui';
 import SelectPortal from './select-portal.svelte';
 import SelectScrollUpButton from './select-scroll-up-button.svelte';
 import SelectScrollDownButton from './select-scroll-down-button.svelte';
-import { cn, type WithoutChild } from '../../utils.ts';
+import { cn, type WithoutChild } from '../../utils';
 import type { ComponentProps } from 'svelte';
-import type { WithoutChildrenOrChild } from '../../utils.ts';
+import type { WithoutChildrenOrChild } from '../../utils';
 
 let {
 	ref = $bindable(null),

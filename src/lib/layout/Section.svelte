@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { Badge } from '../components/badge/index.ts';
+	import { Badge } from '../components/badge';
 	import type { HTMLAttributes } from 'svelte/elements';
 
 	let {

@@ -1,7 +1,7 @@
 <script lang="ts" module>
 import { getContext, setContext } from 'svelte';
 import type { VariantProps } from 'tailwind-variants';
-import { toggleVariants } from '../toggle/index.ts';
+import { toggleVariants } from '../toggle';
 
 type ToggleVariants = VariantProps<typeof toggleVariants>;
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { HTMLAttributes } from 'svelte/elements';
-import { getEmblaContext } from './context.ts';
-import { cn, type WithElementRef } from '../../utils.ts';
+import { getEmblaContext } from './context';
+import { cn, type WithElementRef } from '../../utils';
 
 let {
 	ref = $bindable(null),

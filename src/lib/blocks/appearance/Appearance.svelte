@@ -1,7 +1,7 @@
 <script lang="ts">
-	import * as Field from '../../components/field/index.ts';
-	import * as Item from '../../components/item/index.ts';
-	import * as RadioGroup from '../../components/radio-group/index.ts';
+	import * as Field from '../../components/field';
+	import * as Item from '../../components/item';
+	import * as RadioGroup from '../../components/radio-group';
 	import { setMode, userPrefersMode } from 'mode-watcher';
 
 	type Mode = (typeof userPrefersMode)['current'];

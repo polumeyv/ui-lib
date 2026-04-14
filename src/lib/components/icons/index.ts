@@ -1,1 +1,1 @@
-export { GoogleIcon } from '../../icons/index.ts';
+export { GoogleIcon } from '../../icons';

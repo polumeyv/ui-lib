@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as InputGroup from '../components/input-group/index.ts';
-	import * as Select from '../components/select/index.ts';
+	import * as InputGroup from '../components/input-group';
+	import * as Select from '../components/select';
 
 	const COUNTRIES = { US: 1, CA: 1, MX: 52 } as const;
 	type CountryCode = keyof typeof COUNTRIES;

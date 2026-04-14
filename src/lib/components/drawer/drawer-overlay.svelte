@@ -1,6 +1,6 @@
 <script lang="ts">
 import { Drawer as DrawerPrimitive } from 'vaul-svelte';
-import { cn } from '../../utils.ts';
+import { cn } from '../../utils';
 
 let { ref = $bindable(null), class: className, ...restProps }: DrawerPrimitive.OverlayProps = $props();
 </script>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { HTMLOptgroupAttributes } from 'svelte/elements';
-	import type { WithElementRef } from '../../utils.ts';
+	import type { WithElementRef } from '../../utils';
 
 	let { ref = $bindable(null), children, ...restProps }: WithElementRef<HTMLOptgroupAttributes> = $props();
 </script>

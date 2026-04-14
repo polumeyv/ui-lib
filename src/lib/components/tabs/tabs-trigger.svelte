@@ -1,6 +1,6 @@
 <script lang="ts">
 import { Tabs as TabsPrimitive } from 'bits-ui';
-import { cn } from '../../utils.ts';
+import { cn } from '../../utils';
 import { mergeProps } from 'bits-ui';
 import type { Snippet } from 'svelte';
 

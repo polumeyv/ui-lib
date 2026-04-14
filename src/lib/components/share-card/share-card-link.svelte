@@ -1,8 +1,8 @@
 <script lang="ts">
-import { cn, type WithElementRef } from '../../utils.ts';
+import { cn, type WithElementRef } from '../../utils';
 import type { HTMLAttributes } from 'svelte/elements';
-import { Input } from '../input/index.ts';
-import { Button } from '../button/index.ts';
+import { Input } from '../input';
+import { Button } from '../button';
 import Copy from '@lucide/svelte/icons/copy';
 import Check from '@lucide/svelte/icons/check';
 

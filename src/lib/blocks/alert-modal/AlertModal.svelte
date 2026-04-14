@@ -1,9 +1,9 @@
 <script lang="ts">
-	import * as AlertDialog from '../../components/alert-dialog/index.ts';
-	import * as Field from '../../components/field/index.ts';
-	import { Root as Input } from '../../components/input/index.ts';
-	import { Spinner } from '../../components/spinner/index.ts';
-	import { alertModal } from './alert-modal.svelte.ts';
+	import * as AlertDialog from '../../components/alert-dialog';
+	import * as Field from '../../components/field';
+	import { Root as Input } from '../../components/input';
+	import { Spinner } from '../../components/spinner';
+	import { alertModal } from './alert-modal.svelte';
 
 	const variantClasses: Record<string, string> = {
 		destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
