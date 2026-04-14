@@ -25,8 +25,8 @@
 	let mobileMenuOpen = $state(false);
 </script>
 
-<nav class="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-sm">
-	<div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
+<nav class="sticky top-0 z-50 border-b border-border/40 bg-background/80 py-3 backdrop-blur-sm">
+	<div class="mx-auto flex h-16 max-w-8xl items-center justify-between px-16">
 		<!-- Left: brand link + desktop nav links -->
 		<div class="gap-10 md:flex items-center">
 			<a href={brandHref} class="text-xl font-bold">{brand}</a>

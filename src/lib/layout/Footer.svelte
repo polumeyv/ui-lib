@@ -6,10 +6,7 @@
 		copyright?: string;
 	}
 
-	let {
-		links = [],
-		copyright = `\u00A9 ${new Date().getFullYear()} Polumeyv LLC. All rights reserved.`,
-	}: Props = $props();
+	let { links = [], copyright = `\u00A9 ${new Date().getFullYear()} Polumeyv LLC. All rights reserved.` }: Props = $props();
 </script>
 
 <footer class="border-t border-border/40 px-6 py-12">
