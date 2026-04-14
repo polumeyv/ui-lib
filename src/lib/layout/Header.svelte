@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import { MediaQuery } from 'svelte/reactivity';
 	import { Button } from '../components/button';
 	import { ThemeToggle } from '../components/theme-toggle';
 	import * as Sheet from '../components/sheet';
@@ -30,6 +31,11 @@
 	}: Props = $props();
 
 	let mobileMenuOpen = $state(false);
+	const isDesktop = new MediaQuery('min-width: 768px');
+
+	$effect(() => {
+		if (isDesktop.current) mobileMenuOpen = false;
+	});
 </script>
 
 <nav class="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-sm">
