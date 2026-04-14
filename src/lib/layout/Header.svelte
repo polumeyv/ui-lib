@@ -43,7 +43,7 @@
 		<div class="flex items-center gap-2">
 			{@render children?.()}
 			{#if showThemeToggle}<ThemeToggle />{/if}
-			{#if action}<Button class="md:hidden" href={action.href}>{action.label}</Button>{/if}
+			{#if action}<Button class="hidden md:inline-flex" href={action.href}>{action.label}</Button>{/if}
 			<!-- Mobile Sheet menu (md:hidden trigger) -->
 			<Sheet.Root bind:open={mobileMenuOpen}>
 				<Sheet.Trigger>
