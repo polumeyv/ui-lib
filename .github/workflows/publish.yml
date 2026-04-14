@@ -27,6 +27,8 @@ jobs:
           node -e "const fs=require('fs');const p=require('./package.json');p.version='$NEW';fs.writeFileSync('./package.json',JSON.stringify(p,null,2)+'\n')"
           echo "Bumped $OLD -> $NEW"
 
-      - run: bun publish --access public
+      - run: bun run prepack
+
+      - run: bun publish --access public --ignore-scripts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
