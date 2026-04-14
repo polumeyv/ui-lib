@@ -16,6 +16,8 @@ jobs:
 
       - uses: oven-sh/setup-bun@v2
 
+      - run: bun install --frozen-lockfile
+
       - name: Bump patch version
         run: |
           OLD=$(node -p "require('./package.json').version")
