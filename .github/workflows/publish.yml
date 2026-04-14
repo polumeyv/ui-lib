@@ -9,7 +9,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
     steps:
       - uses: actions/checkout@v4
@@ -32,3 +32,11 @@ jobs:
       - run: bun publish --access public --ignore-scripts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit version bump
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add package.json
+          git commit -m "Release v$(node -p "require('./package.json').version") [skip ci]"
+          git push
