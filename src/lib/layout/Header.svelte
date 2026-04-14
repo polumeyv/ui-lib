@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { MediaQuery } from 'svelte/reactivity';
 	import { Button } from '../components/button';
 	import { ThemeToggle } from '../components/theme-toggle';
 	import * as Sheet from '../components/sheet';
@@ -21,21 +20,9 @@
 		children?: Snippet;
 	}
 
-	let {
-		brand,
-		brandHref = '/',
-		navLinks = [],
-		action,
-		showThemeToggle = true,
-		children
-	}: Props = $props();
+	let { brand, brandHref = '/', navLinks = [], action, showThemeToggle = true, children }: Props = $props();
 
 	let mobileMenuOpen = $state(false);
-	const isDesktop = new MediaQuery('min-width: 768px');
-
-	$effect(() => {
-		if (isDesktop.current) mobileMenuOpen = false;
-	});
 </script>
 
 <nav class="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-sm">
@@ -45,10 +32,7 @@
 			<a href={brandHref} class="text-xl font-bold">{brand}</a>
 			<div class="hidden md:flex gap-6">
 				{#each navLinks as link (link.href)}
-					<a
-						href={link.href}
-						class="text-sm transition-colors hover:text-muted-foreground"
-					>
+					<a href={link.href} class="text-sm transition-colors hover:text-muted-foreground">
 						{link.label}
 					</a>
 				{/each}
@@ -59,7 +43,7 @@
 		<div class="flex items-center gap-2">
 			{@render children?.()}
 			{#if showThemeToggle}<ThemeToggle />{/if}
-			{#if action}<Button href={action.href}>{action.label}</Button>{/if}
+			{#if action}<Button class="md:hidden" href={action.href}>{action.label}</Button>{/if}
 			<!-- Mobile Sheet menu (md:hidden trigger) -->
 			<Sheet.Root bind:open={mobileMenuOpen}>
 				<Sheet.Trigger>
@@ -75,11 +59,7 @@
 					</Sheet.Header>
 					<nav class="flex flex-col gap-4 px-4 py-6">
 						{#each navLinks as link (link.href)}
-							<a
-								href={link.href}
-								class="text-lg font-medium text-foreground transition-colors hover:text-primary"
-								onclick={() => (mobileMenuOpen = false)}
-							>
+							<a href={link.href} class="text-lg font-medium text-foreground transition-colors hover:text-primary" onclick={() => (mobileMenuOpen = false)}>
 								{link.label}
 							</a>
 						{/each}
