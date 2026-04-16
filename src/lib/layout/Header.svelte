@@ -1,89 +1,66 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
 	import { Button } from '../components/button';
-	import { ThemeToggle } from '../components/theme-toggle';
-	import * as Sheet from '../components/sheet';
-	import Menu from '@lucide/svelte/icons/menu';
+	import MobileDropdown from './MobileDropdown.svelte';
+
+	type NavLink = { href: string; label: string };
+	type ActionButton = {
+		href: string;
+		label: string;
+		variant?: 'default' | 'outline' | 'ghost' | 'card' | 'secondary';
+	};
 
 	interface Props {
-		/** Brand name or text displayed as logo link */
 		brand: string;
-		/** URL the brand links to */
 		brandHref?: string;
-		/** Navigation links */
-		navLinks?: { href: string; label: string }[];
-		/** Primary action button (e.g., login/dashboard) */
-		action?: { href: string; label: string };
-		/** Whether to show theme toggle (default true) */
-		showThemeToggle?: boolean;
-		/** Optional snippet for custom right-side content before the action button */
-		children?: Snippet;
+		navLinks?: NavLink[];
+		actions?: ActionButton[];
+		mobileActions?: ActionButton[];
+		showBorder?: boolean;
+		mobileId?: string;
 	}
 
-	let { brand, brandHref = '/', navLinks = [], action, showThemeToggle = true, children }: Props = $props();
+	let {
+		brand,
+		brandHref = '/',
+		navLinks = [],
+		actions = [],
+		mobileActions,
+		showBorder = false,
+		mobileId = 'mobile-nav',
+	}: Props = $props();
 
-	let mobileMenuOpen = $state(false);
+	let mobileOpen = $state(false);
 </script>
 
-<nav class="sticky top-0 z-50 h-13 border-b border-border/40 bg-background/80 py-3 backdrop-blur-sm">
+<div
+	class="py-4 sticky top-0 justify-center items-center flex z-50 transition-colors duration-500 ease-in-out {showBorder
+		? 'border-b'
+		: ''} {mobileOpen ? 'bg-transparent' : 'bg-background'}">
 	<div class="flex w-full relative">
-		<div class="flex w-full items-center relative max-w-7xl mx-auto px-16">
-			<!-- Left: brand link + desktop nav links -->
-			<div class="gap-10 md:flex items-center">
-				<a href={brandHref} class="text-xl font-bold">{brand}</a>
-				<ul class="hidden md:flex gap-6 list-none p-0 m-0">
-					{#each navLinks as link (link.href)}
-						<li>
-							<a href={link.href} class="text-sm transition-colors hover:text-muted-foreground">
-								{link.label}
-							</a>
-						</li>
-					{/each}
-				</ul>
-
-				<!-- Right: optional children + theme toggle + action button + mobile sheet -->
-				<div class="flex items-center gap-2">
-					{@render children?.()}
-					{#if showThemeToggle}<ThemeToggle />{/if}
-					{#if action}<Button class="hidden md:inline-flex" href={action.href}>{action.label}</Button>{/if}
-					<!-- Mobile Sheet menu (md:hidden trigger) -->
-					<Sheet.Root bind:open={mobileMenuOpen}>
-						<Sheet.Trigger>
-							{#snippet child({ props })}
-								<Button {...props} variant="ghost" size="icon" class="md:hidden">
-									<Menu /><span class="sr-only">Open menu</span>
+		<div class="flex w-full justify-between relative z-50 max-w-7xl mx-auto px-8">
+			<a href={brandHref} class="text-xl flex items-center relative z-50">{brand}</a>
+			<nav>
+				<div class="flex justify-end justify-self-end gap-2 flex-end">
+					<ul class="hidden md:flex grow items-left list-none mx-5 gap-2">
+						{#each navLinks as link (link.href)}
+							<li class="self-center">
+								<a href={link.href} class="p-3 font-medium text-sm">
+									{link.label}
+								</a>
+							</li>
+						{/each}
+						{#each actions as action (action.href)}
+							<li>
+								<Button variant={action.variant ?? 'default'} class="hidden md:inline-flex" href={action.href}>
+									{action.label}
 								</Button>
-							{/snippet}
-						</Sheet.Trigger>
-						<Sheet.Content side="right" class="w-72">
-							<Sheet.Header>
-								<Sheet.Title>{brand}</Sheet.Title>
-							</Sheet.Header>
-							<nav class="px-4 py-6">
-								<ul class="flex flex-col gap-4 list-none p-0 m-0">
-									{#each navLinks as link (link.href)}
-										<li>
-											<a
-												href={link.href}
-												class="text-lg font-medium text-foreground transition-colors hover:text-primary"
-												onclick={() => (mobileMenuOpen = false)}>
-												{link.label}
-											</a>
-										</li>
-									{/each}
-								</ul>
-							</nav>
-							{#if action}
-								<div class="border-t mx-4 pt-6">
-									<Button href={action.href} onclick={() => (mobileMenuOpen = false)}>
-										{action.label}
-									</Button>
-								</div>
-							{/if}
-						</Sheet.Content>
-					</Sheet.Root>
+							</li>
+						{/each}
+					</ul>
 				</div>
-			</div>
+			</nav>
+
+			<MobileDropdown {navLinks} actions={mobileActions ?? actions} bind:open={mobileOpen} id={mobileId} />
 		</div>
 	</div>
-</nav>
+</div>
