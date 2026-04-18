@@ -26,7 +26,7 @@
 </script>
 
 <div class="bg-background flex flex-col">
-	<div class="min-h-screen max-w-7xl px-8 md:px-0 mx-auto">
+	<div class="min-h-screen max-w-7xl w-full px-8 mx-auto">
 		{@render children()}
 	</div>
 
