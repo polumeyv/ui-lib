@@ -40,12 +40,13 @@
 	onMount(() => {
 		let paymentEl: { unmount(): void } | null = null;
 		Promise.all([createSetupIntent(), loadStripe(stripeKey)])
-			.then(([{ clientSecret }, s]) => {
+			.then(([{ clientSecret, customerSessionClientSecret }, s]) => {
 				if (!s || !clientSecret) throw new Error('Failed to initialize payment');
 				const isDark = document.documentElement.classList.contains('dark');
 				stripe = s;
 				elements = s.elements({
 					clientSecret,
+					customerSessionClientSecret,
 					appearance: {
 						theme: isDark ? 'night' : 'stripe',
 						variables: {

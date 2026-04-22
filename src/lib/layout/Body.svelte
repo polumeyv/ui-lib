@@ -32,7 +32,7 @@
 
 	<Separator />
 
-	<footer class="p-10 max-w-7xl mx-auto w-full">
+	<footer class="p-10 max-w-7xl mx-auto w-full mb-10">
 		<div class="p-5 flex flex-col gap-5">
 			<div class="flex flex-col gap-15 lg:flex-row w-full justify-between lg:items-end">
 				<div class="flex flex-col gap-2 justify-end">
@@ -76,5 +76,4 @@
 			</div>
 		</div>
 	</footer>
-	<div class="h-15"></div>
 </div>
