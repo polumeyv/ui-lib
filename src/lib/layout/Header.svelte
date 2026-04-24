@@ -38,7 +38,7 @@
 		: ''} {mobileOpen ? 'bg-transparent' : 'bg-background'}">
 	<div class="flex w-full relative">
 		<div class="flex w-full justify-between relative z-50 max-w-7xl mx-auto px-8">
-			<a href={brandHref} class="text-xl flex items-center relative z-50">{brand}</a>
+			<a href={brandHref} onclick={() => (mobileOpen = false)} class="text-xl flex items-center relative z-50">{brand}</a>
 			<nav>
 				<div class="flex justify-end justify-self-end gap-2 flex-end">
 					<ul class="hidden md:flex grow items-left list-none mx-5 gap-2">
