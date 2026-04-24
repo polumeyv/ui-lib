@@ -1,4 +1,3 @@
-export * as Body from './Body/index.js';
 export { default as ErrorPage } from './ErrorPage.svelte';
 export { default as Footer } from './Footer.svelte';
 export { default as Header } from './Header.svelte';
