@@ -155,10 +155,17 @@
 	}
 
 	html {
-		@apply overscroll-none scroll-smooth;
+		@apply overscroll-none scroll-smooth bg-background text-foreground;
+		color-scheme: light;
+	}
+
+	html:is(.dark *),
+	html.dark {
+		color-scheme: dark;
 	}
 
 	body {
+		@apply bg-background text-foreground;
 		font-synthesis-weight: none;
 		text-rendering: optimizeLegibility;
 	}
