@@ -22,6 +22,7 @@
         "vaul-svelte": "1.0.0-next.7",
       },
       "devDependencies": {
+        "@internationalized/date": "^3.12.0",
         "@polumeyv/utils": "^0.1.5",
         "@sveltejs/adapter-auto": "^7.0.1",
         "@sveltejs/kit": "^2.57.0",
@@ -36,6 +37,7 @@
         "@types/d3-shape": "^3.1.8",
         "@types/d3-time": "^3.0.4",
         "csstype": "^3.2.3",
+        "effect": "^3.21.0",
         "publint": "^0.3.18",
         "svelte": "^5.55.2",
         "svelte-check": "^4.4.6",
@@ -43,6 +45,9 @@
         "vite": "^8.0.3",
       },
       "peerDependencies": {
+        "@internationalized/date": "^3.12.0",
+        "@sveltejs/kit": "^2.0.0",
+        "effect": "^3.21.0",
         "svelte": "^5.55.1",
       },
     },
