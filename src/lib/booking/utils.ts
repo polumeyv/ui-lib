@@ -202,7 +202,7 @@ export const parseTimeParam = (s: string): { year: number; month: number; day: n
 	try { return decodeTime(s); } catch { return bad('Invalid time param'); }
 };
 
-export const parseFieldEncoding = (s: string): { required: string[]; optional: string[] } => {
+export const parseFieldEncoding = (s: string): { required: readonly string[]; optional: readonly string[] } => {
 	try { return decodeFieldEncoding(s); } catch { return bad('Invalid field encoding'); }
 };
 
